@@ -58,15 +58,15 @@
           <h2>Transpiling Smalltalk (Squeak) to JavaScript</h2>
           <p>I had a first attempt a few years ago. At that time, my idea to work around the lack of green threads in JavaScript was to use
 					continuation-passing style. Such an implementation would also elegantly solve the issue of resumable exceptions.
-					But, while theoretically doable (let alone the horrible looking generated JavaScript sources), stack growth was prohibitive.
-					This was made worse by the fact that any operations on primitives would also have to be implemented, very expensively, as CPT. 
+					But, while theoretically doable (leaving aside the horrible looking generated JavaScript sources), stack growth was prohibitive.
+					This was made worse by the fact that any operations on primitives would also have to be implemented, very expensively, as CPS. 
 					Essentially no optimization seemed possible unless combined with type inferencing. 
 					While I did have prior experience with type inferencing and I had used it succesfully to transpile Smalltalk to Java, in this case, 
-					it seemed to defeat the purpose: doing type inferencing in order to transpile dynamically typed Smalltalk to dynamically typed JavaScript.
+					it seemed to defeat the purpose: inferencing types in order to transpile dynamically typed Smalltalk to dynamically typed JavaScript.
 					As JavaScript has added new features in the last few years, the time seems ripe for a second attempt using the latest and greatest 
 					of what JavaScript now offers: weak references, classes (with parallel hierarchies! and fields), bigint, proxies, (plus other niceties 
 					like promises, dynamic imports, globalThis), and, last but not least, generators.
-					With generators we have an alternative way of implementing green threads that does not suffer from the drawbacks of CPT
+					With generators we have an alternative way of implementing green threads that does not suffer from the drawbacks of CPS
 					Of course, we'll have to see how well they scale in practice, since in our approach, all Smalltalk methods are translated as generator 
 					methods and all invocations are translated as yield* invocations.
 					The idea is to surface the preemption points in the generated JavaScript methods, as the only (conditional) yield expressions. 
